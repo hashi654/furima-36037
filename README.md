@@ -11,10 +11,8 @@
 | first_name         | string   | null: false |
 | kana_last_name     | string   | null: false |
 | kana_first_name    | string   | null: false |
-| birthday           | datetime | null: false |
+| birthday           | date     | null: false |
 
-- has_many :items
-- has_many :orders
 - has_many :managements
 
 ## items テーブル
@@ -32,23 +30,21 @@
 | user               | references | foreign_key: true |
 
 
-- belongs_to :user
-- has_one :order
 - has_one :management
 
 ## orders テーブル
 
-| Colum            | Type      | Options           |
-| ---------------- | --------- |------------------ |
-| postal_code      | string    | null: false       |
-| prefecture_id    | integer   | null: false       |
-| municipality     | string    | null: false       |
-| address          | string    | null: false       |
-| building         | string    |                   |
-| telephone_number | string    | null: false       |
+| Colum            | Type       | Options           |
+| ---------------- | ---------  |------------------ |
+| postal_code      | string     | null: false       |
+| prefecture_id    | integer    | null: false       |
+| municipality     | string     | null: false       |
+| address          | string     | null: false       |
+| building         | string     |                   |
+| telephone_number | string     | null: false       |
+| management       | references | foreign_key: true |
 
-- belongs_to :user
-- belongs_to :item
+- has_one :management
 
 ## management テーブル
 | Colum            | Type       | Options           |
@@ -58,4 +54,5 @@
 
 - belongs_to :user
 - belongs_to :item
+- belongs_to :order
 
