@@ -1,24 +1,59 @@
-# README
+# テーブル設計
 
-This README would normally document whatever steps are necessary to get the
-application up and running.
+## users テーブル
 
-Things you may want to cover:
+| Colum              | Type     | Options     |
+| ------------------ | -------- |------------ |
+| nickname           | string   | null: false |
+| email              | string   | null: false, unique: true |
+| encrypted_password | string   | null: false |
+| last_name          | string   | null: false |
+| first_name         | string   | null: false |
+| kana_last_name     | string   | null: false |
+| kana_first_name    | string   | null: false |
+| birthday           | date     | null: false |
 
-* Ruby version
+- has_many : items
+- has_many :managements
 
-* System dependencies
+## items テーブル
 
-* Configuration
+| Colum              | Type       | Options           |
+| ------------------ | ---------- |------------------ |
+| item_name          | string     | null: false       |
+| explanation        | text       | null: false       |
+| category_id        | integer    | null: false       |
+| status_id          | integer    | null: false       |
+| shipping_charge_id | integer    | null: false       |
+| prefecture_id      | integer    | null: false       |
+| days_to_ship_id    | integer    | null: false       |
+| price              | integer    | null: false       |
+| user               | references | null: false, foreign_key: true |
 
-* Database creation
+- belongs_to :user
+- has_one :management
 
-* Database initialization
+## orders テーブル
 
-* How to run the test suite
+| Colum            | Type       | Options           |
+| ---------------- | ---------  |------------------ |
+| postal_code      | string     | null: false       |
+| prefecture_id    | integer    | null: false       |
+| municipality     | string     | null: false       |
+| address          | string     | null: false       |
+| building         | string     |                   |
+| telephone_number | string     | null: false       |
+| management       | references | null: false, foreign_key: true |
 
-* Services (job queues, cache servers, search engines, etc.)
+- belongs_to :management
 
-* Deployment instructions
+## managements テーブル
+| Colum            | Type       | Options           |
+| ---------------- | ---------- |------------------ |
+| user             | references | null: false, foreign_key: true |
+| item             | references | null: false, foreign_key: true |
 
-* ...
+- belongs_to :user
+- belongs_to :item
+- has_one :order
+
