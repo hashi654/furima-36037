@@ -13,6 +13,7 @@
 | kana_first_name    | string   | null: false |
 | birthday           | date     | null: false |
 
+- has_many : items
 - has_many :managements
 
 ## items テーブル
@@ -29,7 +30,7 @@
 | price              | integer    | null: false       |
 | user               | references | foreign_key: true |
 
-
+- belongs_to :user
 - has_one :management
 
 ## orders テーブル
@@ -44,9 +45,9 @@
 | telephone_number | string     | null: false       |
 | management       | references | foreign_key: true |
 
-- has_one :management
+- belongs_to :management
 
-## management テーブル
+## managements テーブル
 | Colum            | Type       | Options           |
 | ---------------- | ---------- |------------------ |
 | user             | references | foreign_key: true |
@@ -54,5 +55,5 @@
 
 - belongs_to :user
 - belongs_to :item
-- belongs_to :order
+- has_one :order
 
