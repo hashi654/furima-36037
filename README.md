@@ -28,7 +28,7 @@
 | prefecture_id      | integer    | null: false       |
 | days_to_ship_id    | integer    | null: false       |
 | price              | integer    | null: false       |
-| user               | references | foreign_key: true |
+| user               | references | null: false, foreign_key: true |
 
 - belongs_to :user
 - has_one :management
@@ -43,15 +43,15 @@
 | address          | string     | null: false       |
 | building         | string     |                   |
 | telephone_number | string     | null: false       |
-| management       | references | foreign_key: true |
+| management       | references | null: false, foreign_key: true |
 
 - belongs_to :management
 
 ## managements テーブル
 | Colum            | Type       | Options           |
 | ---------------- | ---------- |------------------ |
-| user             | references | foreign_key: true |
-| item             | references | foreign_key: true |
+| user             | references | null: false, foreign_key: true |
+| item             | references | null: false, foreign_key: true |
 
 - belongs_to :user
 - belongs_to :item
