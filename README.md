@@ -13,7 +13,7 @@
 | kana_first_name    | string   | null: false |
 | birthday           | date     | null: false |
 
-- has_many : items
+- has_many :items
 - has_many :managements
 
 ## items テーブル
