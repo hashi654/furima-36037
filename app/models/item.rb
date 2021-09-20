@@ -3,9 +3,9 @@ class Item < ApplicationRecord
   validates :explanation, presence: true
   validates :category_id, presence: true, numericality: { other_than: 1 , message: "can't be blank"}
   validates :status_id, presence: true
-  validates :shipping_charge_id, presence: true
+  validates :cost_id, presence: true
   validates :prefecture_id, presence: true
-  validates :days_to_ship_id, presence: true
+  validates :days_id, presence: true
   validates :image, presence: true
 
   belongs_to :user
@@ -14,7 +14,7 @@ class Item < ApplicationRecord
   extend ActiveHash::Associations::ActiveRecordExtensions
   belongs_to :category
   belongs_to :status
-  belongs_to :shipping_charge
+  belongs_to :cost
   belongs_to :prefecture
-  belongs_to :days_to_ship
+  belongs_to :days
 end
