@@ -1,6 +1,5 @@
 FactoryBot.define do
   factory :item do
-    image           {'app/assets/images/flag.png'}
     item_name       { 'MacBookAir'}
     explanation     { 'MacBookAirの2020年モデルです。新モデルを購入したので不要となりました' }
     category_id     { '2' }
@@ -9,5 +8,10 @@ FactoryBot.define do
     prefecture_id   { '2'}
     days_id         { '2' }
     price           { '100000' }
+    association :user
+
+    after(:build) do |item|
+      item.image.attach(io: File.open('app/assets/images/flag.png'), filename: 'flag.png')
+    end
   end
 end
