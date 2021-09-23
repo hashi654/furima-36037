@@ -6,7 +6,6 @@ function input (){
     addTaxDom.innerHTML = parseInt(inputValue / 10)
     const totalProfit = document.getElementById("profit")
     totalProfit.innerHTML = parseInt(inputValue - (inputValue / 10))
-    console.log(totalProfit)
   });
 };
 
