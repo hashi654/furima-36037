@@ -14,7 +14,7 @@ class OrderManagement
   validates :prefecture, numericality: {other_than: 0, message: "can't be blank"}
 
   def save
-    management = Management.create(user_id: current_user_id, item_id: item_id)
+    management = Management.create(user_id: current_user.id, item_id: item_id)
     Order.create(postal_code: postal_code, prefecture: prefecture, municipality: municipality, address: address, building: building, telephone_number: telephone_number, management_id: management.id) 
   end
 end
