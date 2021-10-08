@@ -2,6 +2,7 @@ class ManagementsController < ApplicationController
 
   def index
     @management_order = ManagementOrder.new
+    @item = Item.find(params[:item_id])
   end
 
   def create
