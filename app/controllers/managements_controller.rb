@@ -3,7 +3,10 @@ class ManagementsController < ApplicationController
   def index
     @management_order = ManagementOrder.new
     @item = Item.find(params[:item_id])
-    unless @item.management.nil? || current_user.id == @item.user_id
+    unless @item.management.nil?
+      redirect_to root_path
+    end
+    if current_user.id == @item.user_id
       redirect_to root_path
     end
   end
