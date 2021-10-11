@@ -3,18 +3,14 @@ class ManagementsController < ApplicationController
   def index
     @management_order = ManagementOrder.new
     @item = Item.find(params[:item_id])
-    unless @item.management.nil?
-      redirect_to root_path
-    end
-    if current_user.id == @item.user_id
-      redirect_to root_path
-    end
+    redirect_to root_path unless @item.management.nil?
+    redirect_to root_path if current_user.id == @item.user_id
   end
 
   def create
     @management_order = ManagementOrder.new(management_params)
     if @management_order.valid?
-      Payjp.api_key = ENV["PAYJP_SECRET_KEY"]
+      Payjp.api_key = ENV['PAYJP_SECRET_KEY']
       Payjp::Charge.create(
         amount: Item.find(params[:item_id]).price,
         card: management_params[:token],
@@ -31,6 +27,8 @@ class ManagementsController < ApplicationController
   private
 
   def management_params
-    params.require(:management_order).permit(:postal_code, :prefecture_id, :municipality, :address, :building, :telephone_number).merge(user_id: current_user.id, item_id: params[:item_id], token: params[:token])
+    params.require(:management_order).permit(:postal_code, :prefecture_id, :municipality, :address, :building, :telephone_number).merge(
+      user_id: current_user.id, item_id: params[:item_id], token: params[:token]
+    )
   end
 end

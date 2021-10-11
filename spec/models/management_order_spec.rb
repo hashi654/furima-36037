@@ -18,7 +18,7 @@ RSpec.describe ManagementOrder, type: :model do
       end
     end
     context '正しく入力できていない場合' do
-      it 'postal_codeが空だと購入できないこと' do 
+      it 'postal_codeが空だと購入できないこと' do
         @management_order.postal_code = ''
         @management_order.valid?
         expect(@management_order.errors.full_messages).to include("Postal code can't be blank")
@@ -26,14 +26,14 @@ RSpec.describe ManagementOrder, type: :model do
       it 'postal_codeが半角のハイフンを含んだ正しい形式でないと購入できないこと' do
         @management_order.postal_code = '1234567'
         @management_order.valid?
-        expect(@management_order.errors.full_messages).to include("Postal code is invalid. Include hyphen(-)")
+        expect(@management_order.errors.full_messages).to include('Postal code is invalid. Include hyphen(-)')
       end
       it 'prefectureを選択していないと購入できないこと' do
         @management_order.prefecture_id = ''
         @management_order.valid?
         expect(@management_order.errors.full_messages).to include("Prefecture can't be blank")
       end
-      it 'prefectureが1だと購入できないこと' do 
+      it 'prefectureが1だと購入できないこと' do
         @management_order.prefecture_id = 1
         @management_order.valid?
         expect(@management_order.errors.full_messages).to include("Prefecture can't be blank")
@@ -56,12 +56,12 @@ RSpec.describe ManagementOrder, type: :model do
       it 'telephone_numberは数字でなければ購入できないこと' do
         @management_order.telephone_number = '電話番号'
         @management_order.valid?
-        expect(@management_order.errors.full_messages).to include("Telephone number is invalid")
+        expect(@management_order.errors.full_messages).to include('Telephone number is invalid')
       end
       it 'telephone_numberは11桁か12桁でなければ購入できないこと' do
         @management_order.telephone_number = '12345678'
         @management_order.valid?
-        expect(@management_order.errors.full_messages).to include("Telephone number is invalid")
+        expect(@management_order.errors.full_messages).to include('Telephone number is invalid')
       end
       it 'userが紐づいていないと購入できないこと' do
         @management_order.user_id = nil
