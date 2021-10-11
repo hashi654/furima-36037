@@ -3,7 +3,6 @@ class ItemsController < ApplicationController
   before_action :set_item, only: [:show, :edit, :update]
   def index
     @items = Item.all.order('created_at DESC')
-
   end
 
   def new
@@ -20,11 +19,14 @@ class ItemsController < ApplicationController
   end
 
   def show
-  
+    @management = Management.find(params[:id])
   end
 
   def edit
     redirect_to action: :index unless current_user.id == @item.user_id
+    unless @item.management.nil?
+      redirect_to action: :index
+    end
   end
 
   def update
