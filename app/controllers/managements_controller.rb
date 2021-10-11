@@ -8,6 +8,12 @@ class ManagementsController < ApplicationController
   def create
     @management_order = ManagementOrder.new(management_params)
     if @management_order.valid?
+      Payjp.api_key = ENV["PAYJP_SECRET_KEY"]
+      Payjp::Charge.create(
+        amount: Item.find(params[:item_id]).price,
+        card: management_params[:token],
+        currency: 'jpy'
+      )
       @management_order.save
       redirect_to root_path
     else
@@ -19,6 +25,6 @@ class ManagementsController < ApplicationController
   private
 
   def management_params
-    params.require(:management_order).permit(:postal_code, :prefecture_id, :municipality, :address, :building, :telephone_number).merge(user_id: current_user.id, item_id: params[:item_id])
+    params.require(:management_order).permit(:postal_code, :prefecture_id, :municipality, :address, :building, :telephone_number).merge(user_id: current_user.id, item_id: params[:item_id], token: params[:token])
   end
 end

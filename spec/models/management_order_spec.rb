@@ -73,6 +73,11 @@ RSpec.describe ManagementOrder, type: :model do
         @management_order.valid?
         expect(@management_order.errors.full_messages).to include("Item can't be blank")
       end
+      it 'tokenが空では登録できないこと' do
+        @management_order.token = nil
+        @management_order.valid?
+        expect(@management_order.errors.full_messages).to include("Token can't be blank")
+      end
     end
   end
 end
