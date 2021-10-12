@@ -19,7 +19,7 @@ class ItemsController < ApplicationController
   end
 
   def show
-    @management = Management.find(params[:id])
+    
   end
 
   def edit
